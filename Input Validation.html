@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//This function verifies if the user has inputted the correct information. Notice that the Country dropdown values include a '300' to test the limit of 1-250.
+//Simply open this .html file with your preferred browser and click Submit to test.
+function validateForm() {
+  var addressValue = document.forms["myForm"]["address"].value;
+  var zipValue = document.forms["myForm"]["zip"].value;
+  var countryValue = document.forms["myForm"]["country"].value;
+  var address2Value = document.forms["myForm"]["address2"].value;
+  var cityValue = document.forms["myForm"]["city"].value;
+
+  if (addressValue == "" || zipValue == "" || countryValue == "" || cityValue == "" ){
+    alert("Please fill in all the starred areas");
+    return false;
+  }
+  else if (addressValue.length < 3){
+    alert("Address cannot be less than 3 characters");
+    return false;
+  }
+  else if (zipValue.length < 3 || !(zipValue.match(/^[0-9]*$/gm))){
+    alert("ZIP cannot be less than 3 digits and needs to contain only numbers");
+    return false;
+  }
+  else if (countryValue > 250 || countryValue < 1){
+      alert("Country must contain a valid country ID (1-250)");
+      return false;
+  }
+  else if (!(address2Value == "")) {
+    if(address2Value.length < 3){
+        alert("Address 2 cannot be less than 3 characters");
+        return false;
+    }
+  }
+  else if (cityValue.length < 3){
+      alert("City cannot be less than 3 characters");
+      return false;
+  }
+
+
+  //This version is more specficic and tells the user exactly what part of the starred inputs they missed
+  /*
+  if (addressValue == "") {
+    alert("Address must be filled out");
+    return false;
+  } else if (addressValue.length < 3){
+    alert("Address cannot be less than 3 characters");
+    return false;
+  }
+  if (zipValue == "") {
+    alert("ZIP must be filled out");
+    return false;
+  } else if (zipValue.length < 3 || !(zipValue.match(/^[0-9]*$/gm))){
+      alert("ZIP cannot be less than 3 digits and needs to contain only numbers");
+      return false;
+  }
+  if (countryValue == "") {
+    alert("Country must be filled out");
+    return false;
+  } else if (countryValue > 250 || countryValue < 1)){
+      alert("Country must contain a valid country ID (1-250)");
+      return false;
+  }
+  if (!(address2Value == "")) {
+    if(address2Value.length < 3){
+      alert("Address 2 cannot be less than 3 characters");
+      return false;
+    }
+  }
+  if (cityValue == "") {
+    alert("City must be filled out");
+    return false;
+  } else if (cityValue.length < 3){
+      alert("City cannot be less than 3 characters");
+      return false;
+  } */
+
+
+}
+</script>
+</head>
+<body>
+
+<form name="myForm" action="" onsubmit="return validateForm()" method="post">
+  Address: <input type="text" name="address">
+  ZIP Code: <input type="text" name="zip">
+  Country: <select name="country">
+              <option value="" disabled selected>Select Your Country</option>
+              <option value="1">1</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="250">250</option>
+              <option value="300">300</option>
+            </select>
+  Address 2: <input type="text" name="address2">
+  City: <input type="text" name="city">
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
